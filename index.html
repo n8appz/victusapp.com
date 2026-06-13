@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victus — the AI macro tracker that shows its work</title>
+<meta name="description" content="Describe meals in plain language. Victus finds calories, macros, and micronutrients — and shows you where every number came from. iPhone app with a 7-day free trial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F4EE; --card:#FFFFFF; --ink:#26241F; --ink-soft:#6B675D;
+    --ink-faint:#A8A294; --sage:#5F7355; --sage-soft:rgba(95,115,85,.10);
+    --line:#E8E3D8; --line-strong:#D8D2C4;
+    --protein:#B4513A; --carbs:#C08A2E; --fat:#6F7F44;
+    --serif:"Fraunces",Georgia,serif; --sans:"Instrument Sans",-apple-system,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:0 24px}
+  a{color:var(--sage)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--sage);outline-offset:3px;border-radius:4px}
+
+  /* Header */
+  header{padding:28px 0 0}
+  .logo{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:-.01em}
+  .logo span{color:var(--sage)}
+  .tag{font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--ink-faint);margin-top:2px}
+
+  /* Hero */
+  .hero{padding:56px 0 28px}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,7.5vw,50px);line-height:1.12;letter-spacing:-.015em}
+  h1 em{font-style:italic;color:var(--sage)}
+  .sub{color:var(--ink-soft);font-size:17px;margin:18px 0 26px;max-width:34em}
+  .cta{display:inline-block;background:var(--sage);color:#fff;text-decoration:none;
+       font-weight:600;font-size:16px;padding:15px 28px;border-radius:13px;
+       transition:transform .15s ease}
+  .cta:active{transform:scale(.97)}
+  .cta-note{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:12px;letter-spacing:.06em}
+
+  /* Demo card — the signature */
+  .demo{margin:44px 0 0;background:var(--card);border:1px solid var(--line);
+        border-radius:20px;padding:20px;box-shadow:0 1px 2px rgba(38,36,31,.04)}
+  .demo-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--ink-faint);margin-bottom:12px}
+  .demo-input{background:var(--paper);border:1px solid var(--line-strong);border-radius:11px;
+              padding:13px 14px;font-family:var(--mono);font-size:13.5px;color:var(--ink);
+              min-height:46px;display:flex;align-items:center}
+  .caret{display:inline-block;width:1px;height:16px;background:var(--sage);margin-left:2px;animation:blink 1s step-end infinite}
+  @keyframes blink{50%{opacity:0}}
+  .rows{margin-top:6px}
+  .row{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line);
+       opacity:0;transform:translateY(6px);transition:opacity .5s ease,transform .5s ease}
+  .row:last-child{border-bottom:none}
+  .row.show{opacity:1;transform:none}
+  .glyph{width:38px;height:38px;border-radius:10px;background:var(--paper);
+         display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .row-name{font-weight:600;font-size:14.5px}
+  .row-meta{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:2px}
+  .row-right{margin-left:auto;text-align:right;flex-shrink:0}
+  .kcal{font-family:var(--mono);font-weight:600;font-size:14px}
+  .kcal small{font-size:9px;color:var(--ink-faint);font-weight:400}
+  .pcf{font-family:var(--mono);font-size:10.5px;font-weight:600;margin-top:2px;display:flex;gap:7px;justify-content:flex-end}
+  .p{color:var(--protein)}.c{color:var(--carbs)}.f{color:var(--fat)}
+  .src{margin-top:14px;display:inline-flex;align-items:center;gap:7px;
+       font-family:var(--mono);font-size:10.5px;color:var(--sage);
+       background:var(--sage-soft);border-radius:99px;padding:6px 12px;
+       opacity:0;transition:opacity .5s ease}
+  .src.show{opacity:1}
+
+  /* Features */
+  .features{padding:64px 0 8px}
+  .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--sage);margin-bottom:8px}
+  .feature{padding:22px 0;border-top:1px solid var(--line)}
+  .feature h2{font-family:var(--serif);font-weight:500;font-size:22px;margin-bottom:6px}
+  .feature p{color:var(--ink-soft);font-size:15px;max-width:36em}
+
+  /* Privacy strip */
+  .privacy{margin:56px 0;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px 24px}
+  .privacy h2{font-family:var(--serif);font-weight:500;font-size:22px;margin-bottom:8px}
+  .privacy p{color:var(--ink-soft);font-size:15px}
+
+  /* Footer */
+  footer{padding:24px 0 56px;border-top:1px solid var(--line)}
+  .foot-links{display:flex;gap:20px;flex-wrap:wrap;font-size:13.5px;margin-bottom:14px}
+  .foot-links a{color:var(--ink-soft);text-decoration:none}
+  .foot-links a:hover{color:var(--sage)}
+  .copyright{font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+
+  @media (prefers-reduced-motion: reduce){
+    .row,.src{opacity:1;transform:none;transition:none}
+    .caret{animation:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="logo">Victus<span>.</span></div>
+  <div class="tag">NOURISHMENT, MEASURED</div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <h1>The macro tracker that <em>shows its work.</em></h1>
+    <p class="sub">Describe what you ate in plain language. Victus finds the calories, macros, and micronutrients — and shows you where every number came from.</p>
+
+    <!-- ⬇️ PASTE YOUR APP STORE LINK in the href below once the app is approved.
+         Find it: App Store Connect → App Information → Apple ID →
+         https://apps.apple.com/app/id YOURNUMBER -->
+    <a class="cta" href="#" id="appstore">Download on the App Store</a>
+    <div class="cta-note">FREE TO TRY · VICTUS PRO 7 DAYS FREE</div>
+
+    <div class="demo" aria-label="Example of logging a meal in Victus">
+      <div class="demo-label">LOG A MEAL</div>
+      <div class="demo-input"><span id="typed">grilled chicken burrito bowl, extra rice</span><span class="caret" id="caret"></span></div>
+      <div class="rows">
+        <div class="row" id="r1">
+          <div class="glyph">🌯</div>
+          <div><div class="row-name">Chicken burrito bowl</div><div class="row-meta">1 bowl · extra rice</div></div>
+          <div class="row-right"><div class="kcal">735 <small>kcal</small></div><div class="pcf"><span class="p">52P</span><span class="c">88C</span><span class="f">18F</span></div></div>
+        </div>
+        <div class="row" id="r2">
+          <div class="glyph">🥑</div>
+          <div><div class="row-name">Guacamole</div><div class="row-meta">1 serving · 3.5 oz</div></div>
+          <div class="row-right"><div class="kcal">230 <small>kcal</small></div><div class="pcf"><span class="p">2P</span><span class="c">8C</span><span class="f">22F</span></div></div>
+        </div>
+      </div>
+      <div class="src" id="src">⌕ sources · USDA FoodData Central + 2 more</div>
+    </div>
+  </section>
+
+  <section class="features wrap">
+    <div class="eyebrow">WHAT IT DOES</div>
+
+    <div class="feature">
+      <h2>Log anything, your way</h2>
+      <p>Type it, scan a barcode, or photograph a whole recipe — Victus reads the ingredients and builds the dish, per-serving macros included.</p>
+    </div>
+
+    <div class="feature">
+      <h2>Every number, sourced</h2>
+      <p>Other trackers hand you a number and ask for trust. Victus cites where its nutrition data came from, so you can check the work before you log it.</p>
+    </div>
+
+    <div class="feature">
+      <h2>More than macros</h2>
+      <p>Vitamins and minerals tracked against daily values, trends over weeks and months, and portions in real units — grams, ounces, or “one large egg.”</p>
+    </div>
+
+    <div class="feature">
+      <h2>True Apple Health sync</h2>
+      <p>Reads your activity, writes your nutrition — micronutrients included. A real two-way sync with the Health app.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="privacy">
+      <h2>Private by design</h2>
+      <p>No accounts. No ads. No selling your data. Your food log lives on your iPhone — not on our servers. <a href="https://n8appz.github.io/victus/">Read the privacy policy</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="foot-links">
+    <a href="https://n8appz.github.io/victus/">Privacy policy</a>
+    <a href="mailto:n8apps@n8-fit.com">Support</a>
+  </div>
+  <div class="copyright">© 2026 N8 APPS, LLC · CHARLOTTE, NC</div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var typed = document.getElementById("typed");
+  var caret = document.getElementById("caret");
+  var full = typed.textContent;
+  var steps = [
+    function(){ document.getElementById("r1").classList.add("show"); },
+    function(){ document.getElementById("r2").classList.add("show"); },
+    function(){ document.getElementById("src").classList.add("show"); caret.style.display="none"; }
+  ];
+  if (reduce){ steps.forEach(function(s){s();}); return; }
+  typed.textContent = "";
+  var i = 0;
+  function type(){
+    if (i < full.length){
+      typed.textContent += full.charAt(i++);
+      setTimeout(type, 34 + Math.random()*40);
+    } else {
+      setTimeout(function(){ steps[0](); }, 500);
+      setTimeout(function(){ steps[1](); }, 950);
+      setTimeout(function(){ steps[2](); }, 1500);
+    }
+  }
+  setTimeout(type, 600);
+})();
+</script>
+
+</body>
+</html>
