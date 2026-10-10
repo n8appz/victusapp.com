@@ -4,10 +4,99 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victus — the AI macro tracker that shows its work</title>
-<meta name="description" content="Describe meals in plain language. Victus finds calories, macros, and micronutrients — and shows you where every number came from. iPhone app with a 7-day free trial.">
+<meta name="description" content="Describe meals in plain language. Victus finds calories, macros, and micronutrients — and shows you where every number came from. iPhone app with a 7-day free trial, then $9.99/month.">
+<link rel="canonical" href="https://victusmacrotracker.com/">
+
+<!-- Social preview (Open Graph + Twitter) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Victus">
+<meta property="og:title" content="Victus — the AI macro tracker that shows its work">
+<meta property="og:description" content="Describe a meal in plain language. Victus finds the calories, macros, and micronutrients — and shows you the verified source behind every number before you log it.">
+<meta property="og:url" content="https://victusmacrotracker.com/">
+<meta property="og:image" content="https://victusmacrotracker.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Victus — the AI macro tracker that shows its work">
+<meta name="twitter:description" content="Describe a meal in plain language. See the calories, macros, and micronutrients — and the verified source behind every number.">
+<meta name="twitter:image" content="https://victusmacrotracker.com/og-image.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Structured data: organization, app + price, and FAQ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "N8 Apps, LLC",
+  "url": "https://victusmacrotracker.com/",
+  "logo": "https://victusmacrotracker.com/og-image.png",
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": { "@type": "MobileApplication", "name": "Victus" }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Victus — AI Macro Tracker",
+  "operatingSystem": "iOS",
+  "applicationCategory": "HealthApplication",
+  "description": "Describe a meal in plain language and Victus finds the calories, macros, and micronutrients — citing the verified source behind every number before you log it.",
+  "url": "https://victusmacrotracker.com/",
+  "installUrl": "https://apps.apple.com/app/id6777701017",
+  "offers": {
+    "@type": "Offer",
+    "price": "9.99",
+    "priceCurrency": "USD",
+    "description": "Victus Pro — 7-day free trial, then $9.99/month. Cancel anytime in the App Store."
+  },
+  "publisher": { "@type": "Organization", "name": "N8 Apps, LLC" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I know the numbers are accurate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Victus resolves your meal to verified USDA FoodData Central data and other named sources, and shows you the source behind every number before you log it. You can check the work and edit any value instead of trusting a figure blindly." }
+    },
+    {
+      "@type": "Question",
+      "name": "What does Victus cost, and what happens after the free trial?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The core app is free forever. Victus Pro is a 7-day free trial, then $9.99/month. After the trial it renews at $9.99/month unless you cancel, and you can cancel anytime from your App Store subscriptions." }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to my data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Your food log lives on your iPhone, not on our servers. No account to create, no ads, and we don't sell your data." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there an Android version?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not yet — Victus is iPhone-only today, with deep Apple Health integration. If you'd like an Android version, email us so we can gauge demand." }
+    },
+    {
+      "@type": "Question",
+      "name": "What about a restaurant meal or a dish with no clear entry?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Describe it the way you'd tell a friend — “grilled chicken burrito bowl, extra rice.” Victus breaks it into items, estimates each from its sources, and shows you what it used so you can adjust portions before logging." }
+    },
+    {
+      "@type": "Question",
+      "name": "I'm leaving MyFitnessPal. Is switching a hassle?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No account and no import needed. Open Victus, describe your first meal, and you're logging in under a minute — without digging through a list of 30 duplicate entries to find the real one." }
+    }
+  ]
+}
+</script>
+
 <style>
   :root{
     --paper:#F7F4EE; --card:#FFFFFF; --ink:#26241F; --ink-soft:#6B675D;
@@ -24,14 +113,18 @@
   a{color:var(--sage)}
   a:focus-visible,button:focus-visible{outline:2px solid var(--sage);outline-offset:3px;border-radius:4px}
 
-  /* Header */
-  header{padding:28px 0 0}
+  /* Header + nav */
+  header{padding:24px 0 0}
+  .bar{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .logo{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:-.01em}
   .logo span{color:var(--sage)}
   .tag{font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--ink-faint);margin-top:2px}
+  nav{display:flex;gap:20px;font-size:14px}
+  nav a{color:var(--ink-soft);text-decoration:none}
+  nav a:hover{color:var(--sage)}
 
   /* Hero */
-  .hero{padding:56px 0 28px}
+  .hero{padding:52px 0 28px}
   h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,7.5vw,50px);line-height:1.12;letter-spacing:-.015em}
   h1 em{font-style:italic;color:var(--sage)}
   .sub{color:var(--ink-soft);font-size:17px;margin:18px 0 26px;max-width:34em}
@@ -39,15 +132,22 @@
        font-weight:600;font-size:16px;padding:15px 28px;border-radius:13px;
        transition:transform .15s ease}
   .cta:active{transform:scale(.97)}
-  .cta-note{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:12px;letter-spacing:.06em}
+  .cta-note{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:12px;letter-spacing:.06em;line-height:1.7}
+  .reassure{font-size:13.5px;color:var(--ink-soft);margin-top:8px;max-width:38em}
+  .reassure b{color:var(--ink);font-weight:600}
+
+  /* STUB (flag): App Store rating badge style. The App Store shows "not enough ratings"
+     today, so no rating/count is displayed yet. When ratings exist, add under the CTA:
+     <div class="rating">* 4.8 on the App Store - 120+ ratings</div> */
+  .rating{font-family:var(--mono);font-size:12px;color:var(--sage);margin-top:10px}
 
   /* Demo card — the signature */
-  .demo{margin:44px 0 0;background:var(--card);border:1px solid var(--line);
+  .demo{margin:40px 0 0;background:var(--card);border:1px solid var(--line);
         border-radius:20px;padding:20px;box-shadow:0 1px 2px rgba(38,36,31,.04)}
   .demo-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--ink-faint);margin-bottom:12px}
   .demo-input{background:var(--paper);border:1px solid var(--line-strong);border-radius:11px;
               padding:13px 14px;font-family:var(--mono);font-size:13.5px;color:var(--ink);
-              min-height:46px;display:flex;align-items:center}
+              min-height:46px;display:flex;align-items:center;flex-wrap:wrap}
   .caret{display:inline-block;width:1px;height:16px;background:var(--sage);margin-left:2px;animation:blink 1s step-end infinite}
   @keyframes blink{50%{opacity:0}}
   .rows{margin-top:6px}
@@ -70,20 +170,63 @@
        opacity:0;transition:opacity .5s ease}
   .src.show{opacity:1}
 
-  /* Features */
-  .features{padding:64px 0 8px}
+  /* Switcher line */
+  .switch{margin:30px 0 0;background:var(--sage-soft);border:1px solid var(--line);
+          border-radius:16px;padding:18px 20px;font-size:15px;color:var(--ink)}
+  .switch b{font-weight:600}
+
+  /* Section helper */
   .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--sage);margin-bottom:8px}
+  .sec-title{font-family:var(--serif);font-weight:500;font-size:24px;margin-bottom:4px}
+
+  /* Features */
+  .features{padding:60px 0 8px}
   .feature{padding:22px 0;border-top:1px solid var(--line)}
   .feature h2{font-family:var(--serif);font-weight:500;font-size:22px;margin-bottom:6px}
   .feature p{color:var(--ink-soft);font-size:15px;max-width:36em}
+  .feature p b{color:var(--ink);font-weight:600}
+
+  /* Pricing */
+  .pricing{padding:56px 0 0}
+  .price-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;margin-top:16px}
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.price-grid{grid-template-columns:1fr}}
+  .tier{border:1px solid var(--line);border-radius:14px;padding:18px}
+  .tier.pro{border-color:var(--sage);background:var(--sage-soft)}
+  .tier h3{font-family:var(--serif);font-weight:600;font-size:18px;margin-bottom:2px}
+  .tier .amt{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-bottom:10px}
+  .tier ul{list-style:none;font-size:14px;color:var(--ink-soft)}
+  .tier li{padding:3px 0 3px 18px;position:relative}
+  .tier li::before{content:"·";position:absolute;left:4px;color:var(--sage);font-weight:700}
+  .price-foot{font-size:13.5px;color:var(--ink-soft);margin-top:16px}
+  .price-foot b{color:var(--ink);font-weight:600}
+
+  /* Founder */
+  .founder{padding:56px 0 0}
+  .founder-card{display:flex;gap:20px;align-items:flex-start;background:var(--card);
+                border:1px solid var(--line);border-radius:20px;padding:24px;margin-top:16px}
+  @media(max-width:520px){.founder-card{flex-direction:column;gap:14px}}
+  .avatar{width:64px;height:64px;border-radius:50%;flex-shrink:0;background:var(--sage);
+          color:#fff;display:flex;align-items:center;justify-content:center;
+          font-family:var(--serif);font-weight:600;font-size:24px}
+  .founder-card h3{font-family:var(--serif);font-weight:600;font-size:19px}
+  .founder-card .role{font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:.04em;margin:2px 0 10px}
+  .founder-card p{color:var(--ink-soft);font-size:15px;margin-bottom:10px}
+  .founder-links{display:flex;gap:16px;font-size:13.5px}
+
+  /* FAQ */
+  .faq{padding:56px 0 0}
+  .qa{border-top:1px solid var(--line);padding:18px 0}
+  .qa h3{font-size:16px;font-weight:600;margin-bottom:5px}
+  .qa p{color:var(--ink-soft);font-size:14.5px;max-width:40em}
 
   /* Privacy strip */
-  .privacy{margin:56px 0;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px 24px}
+  .privacy{margin:56px 0 0;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px 24px}
   .privacy h2{font-family:var(--serif);font-weight:500;font-size:22px;margin-bottom:8px}
   .privacy p{color:var(--ink-soft);font-size:15px}
 
   /* Footer */
-  footer{padding:24px 0 56px;border-top:1px solid var(--line)}
+  footer{margin-top:56px;padding:24px 0 56px;border-top:1px solid var(--line)}
   .foot-links{display:flex;gap:20px;flex-wrap:wrap;font-size:13.5px;margin-bottom:14px}
   .foot-links a{color:var(--ink-soft);text-decoration:none}
   .foot-links a:hover{color:var(--sage)}
@@ -99,17 +242,29 @@
 <body>
 
 <header class="wrap">
-  <div class="logo">Victus<span>.</span></div>
-  <div class="tag">NOURISHMENT, MEASURED</div>
+  <div class="bar">
+    <div>
+      <div class="logo">Victus<span>.</span></div>
+      <div class="tag">NOURISHMENT, MEASURED</div>
+    </div>
+    <nav aria-label="Primary">
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
 </header>
 
 <main>
   <section class="hero wrap">
     <h1>The macro tracker that <em>shows its work.</em></h1>
-    <p class="sub">Describe what you ate in plain language. Victus finds the calories, macros, and micronutrients — and shows you where every number came from.</p>
+    <p class="sub">Describe what you ate in plain language. Victus resolves it to verified, USDA-sourced data — and shows you where every number came from before you log it. No guessing which of 30 duplicate entries is the real one.</p>
 
     <a class="cta" href="https://apps.apple.com/app/id6777701017" id="appstore">Download on the App Store</a>
-    <div class="cta-note">FREE TO TRY · VICTUS PRO 7 DAYS FREE</div>
+    <div class="cta-note">FREE TO TRY · VICTUS PRO 7 DAYS FREE · CANCEL ANYTIME IN THE APP STORE</div>
+    <p class="reassure"><b>Free to download</b> — no account, no credit card for the free app. Victus Pro is a 7-day free trial, then <b>$9.99/month</b>; cancel anytime in your App Store subscriptions.</p>
+    <!-- STUB (flag): add an App Store rating badge here once the listing has enough ratings,
+         e.g. <div class="rating">★ 4.8 on the App Store · 120+ ratings</div>. Today the
+         App Store still shows "not enough ratings," so nothing is shown rather than invent one. -->
 
     <div class="demo" aria-label="Example of logging a meal in Victus">
       <div class="demo-label">LOG A MEAL</div>
@@ -128,6 +283,10 @@
       </div>
       <div class="src" id="src">⌕ sources · USDA FoodData Central + 2 more</div>
     </div>
+
+    <div class="switch">
+      <b>Leaving MyFitnessPal?</b> Log your first meal in under a minute — no account, no import needed, and no new paywall sprung on you next quarter.
+    </div>
   </section>
 
   <section class="features wrap">
@@ -140,7 +299,7 @@
 
     <div class="feature">
       <h2>Every number, sourced</h2>
-      <p>Other trackers hand you a number and ask for trust. Victus cites where its nutrition data came from, so you can check the work before you log it.</p>
+      <p>Other trackers hand you a number and ask for trust. <b>No guessing which of 30 duplicate entries is the real one</b> — Victus resolves your meal to verified USDA-sourced data and shows you the source before you log it, so you can check the work.</p>
     </div>
 
     <div class="feature">
@@ -154,6 +313,93 @@
     </div>
   </section>
 
+  <!-- STUB (flag): Testimonials. Add 3–5 real user quotes once collected — first name, a
+       photo, and an outcome-specific line (e.g. "caught a wrong entry before I logged it").
+       Do not use invented quotes. Suggested markup, rendered as a three-card row:
+       <section class="wrap testimonials">
+         <div class="eyebrow">WHAT USERS SAY</div>
+         <div class="t-card"><p>“…”</p><div class="t-who">— First name, context</div></div>
+       </section>
+  -->
+
+  <section id="pricing" class="pricing wrap">
+    <div class="eyebrow">PRICING</div>
+    <h2 class="sec-title">Simple pricing, nothing hidden</h2>
+    <div class="price-card">
+      <div class="price-grid">
+        <div class="tier">
+          <h3>Free</h3>
+          <div class="amt">$0 · forever</div>
+          <ul>
+            <li>Manual logging &amp; your food library</li>
+            <li>Recipes &amp; meal planning</li>
+            <li>Apple Health sync</li>
+            <li>Trends over time</li>
+          </ul>
+        </div>
+        <div class="tier pro">
+          <h3>Victus Pro</h3>
+          <div class="amt">7 days free, then $9.99/month</div>
+          <ul>
+            <li>AI describe-a-meal logging with sources</li>
+            <li>Barcode &amp; nutrition-label scanning</li>
+            <li>Recipe photo import</li>
+            <li>AI coach &amp; safe personalized targets</li>
+          </ul>
+        </div>
+      </div>
+      <p class="price-foot"><b>After your 7-day free trial, Pro renews at $9.99/month.</b> Cancel anytime from your App Store subscriptions — the free app keeps working either way.</p>
+    </div>
+  </section>
+
+  <section id="founder" class="founder wrap">
+    <div class="eyebrow">WHO BUILT IT</div>
+    <h2 class="sec-title">Why I built Victus</h2>
+    <div class="founder-card">
+      <!-- STUB (flag): replace this initials avatar with a real photo for stronger trust —
+           add founder.jpg to the repo and swap in <img class="avatar" src="/founder.jpg" alt="Nathan Smith"> -->
+      <div class="avatar" aria-hidden="true">NS</div>
+      <div>
+        <h3>Nathan Smith</h3>
+        <div class="role">FOUNDER · N8 APPS, LLC</div>
+        <p>I got tired of trackers that hand you a calorie count and expect blind faith — especially when the database is full of near-duplicate entries and no way to tell which one is right. Victus is my answer: every number is resolved to a verified, USDA-backed source you can see before you log it.</p>
+        <p>I'm an independent developer, not a venture-backed team. I build Victus in the open, read every email, and ship updates based on what real users actually ask for.</p>
+        <!-- STUB (flag): add your real LinkedIn/X profile URLs below for founder credibility, then uncomment. -->
+        <!-- <div class="founder-links"><a href="https://www.linkedin.com/in/REPLACE">LinkedIn</a><a href="https://x.com/REPLACE">X / Twitter</a></div> -->
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq wrap">
+    <div class="eyebrow">QUESTIONS</div>
+    <h2 class="sec-title">Answers before you download</h2>
+
+    <div class="qa">
+      <h3>How do I know the numbers are accurate?</h3>
+      <p>Victus resolves your meal to verified USDA FoodData Central data and other named sources, and shows you the source behind every number before you log it. You check the work instead of trusting a figure blindly — and you can edit any value.</p>
+    </div>
+    <div class="qa">
+      <h3>What does it cost, and what happens after the free trial?</h3>
+      <p>The core app is free forever. Victus Pro is a 7-day free trial, then $9.99/month. It renews at $9.99/month unless you cancel, and you can cancel anytime from your App Store subscriptions.</p>
+    </div>
+    <div class="qa">
+      <h3>What happens to my data?</h3>
+      <p>Your food log lives on your iPhone, not on our servers. No account to create, no ads, and we don't sell your data.</p>
+    </div>
+    <div class="qa">
+      <h3>Is there an Android version?</h3>
+      <p>Not yet — Victus is iPhone-only today, with deep Apple Health integration. If you'd like an Android version, <a href="mailto:n8apps@n8-fit.com?subject=Android%20interest">email us</a> so we can gauge demand.</p>
+    </div>
+    <div class="qa">
+      <h3>What about a restaurant meal or a dish with no clear entry?</h3>
+      <p>Describe it the way you'd tell a friend — “grilled chicken burrito bowl, extra rice.” Victus breaks it into items, estimates each from its sources, and shows you what it used so you can adjust portions before logging.</p>
+    </div>
+    <div class="qa">
+      <h3>How does Victus compare to other trackers?</h3>
+      <p>See the honest breakdowns: <a href="/victus-vs-myfitnesspal/">Victus vs MyFitnessPal</a> and <a href="/victus-vs-cronometer/">Victus vs Cronometer</a> — where each one wins, and who each is for.</p>
+    </div>
+  </section>
+
   <section class="wrap">
     <div class="privacy">
       <h2>Private by design</h2>
@@ -164,13 +410,17 @@
 
 <footer class="wrap">
   <div class="foot-links">
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="/victus-vs-myfitnesspal/">vs MyFitnessPal</a>
+    <a href="/victus-vs-cronometer/">vs Cronometer</a>
     <a href="https://n8appz.github.io/victus/">Privacy policy</a>
     <a href="mailto:n8apps@n8-fit.com">Support</a>
   </div>
   <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:14px">
     Questions or help with Victus? Email <a href="mailto:n8apps@n8-fit.com">n8apps@n8-fit.com</a> — we usually reply within a day.
   </p>
-  <div class="copyright">© 2026 N8 APPS, LLC · CHARLOTTE, NC</div>
+  <div class="copyright">© 2026 N8 APPS, LLC · GOLDSBORO, NC</div>
 </footer>
 
 <script>

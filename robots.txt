@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://victusmacrotracker.com/sitemap.xml
