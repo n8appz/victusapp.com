@@ -238,6 +238,15 @@
     html{scroll-behavior:auto}
   }
 </style>
+  <!-- HeyCatch analytics -->
+  <script type="module">
+    import { analytics } from "https://esm.sh/@heycatch/sdk@0.8.3";
+    analytics.init({
+      projectKey: "hck_pk_cF6jgP6l3DxUQcAXatk8JPCxvZSukgQI",
+      install: { framework: "web", agent: "claude-code" },
+      requestBatching: false
+    });
+  </script>
 </head>
 <body>
 
